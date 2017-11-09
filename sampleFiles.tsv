@@ -1,0 +1,4 @@
+sample	fq1	fq2
+A	a.chr21.1.fq.gz	a.chr21.2.fq.gz
+A	a.chr21.1.fq.gz	a.chr21.2.fq.gz
+B	b.chr21.1.fq.gz	b.chr21.2.fq.gz

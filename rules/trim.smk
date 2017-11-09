@@ -1,10 +1,12 @@
 def get_fastq(wildcards):
     return samples.loc[wildcards.sample, ["fq1", "fq2"]].dropna()
 
+ruleorder: cutadapt_pe > cutadapt
 
 rule cutadapt_pe:
     input:
-        get_fastq
+        "merged/{sample}.1.fastq.gz",
+        "merged/{sample}.2.fastq.gz"
     output:
         fastq1="trimmed/{sample}.1.fastq.gz",
         fastq2="trimmed/{sample}.2.fastq.gz",
@@ -19,7 +21,7 @@ rule cutadapt_pe:
 
 rule cutadapt:
     input:
-        get_fastq
+        "merged/{sample}.fastq.gz"
     output:
         fastq="trimmed/{sample}.fastq.gz",
         qc="trimmed/{sample}.qc.txt"

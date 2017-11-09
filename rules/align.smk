@@ -1,10 +1,12 @@
 def get_trimmed(wildcards):
-    if samples.loc[wildcards.sample, "fq2"]:
+    paired = samples.loc[wildcards.sample, "fq2"]
+    if type(paired) != float:
         # paired-end sample
         return expand("trimmed/{sample}.{group}.fastq.gz",
                       sample=wildcards.sample, group=[1, 2])
     # single end sample
-    return "trimmed/{sample}.fastq.gz"
+    return ["trimmed/{sample}.fastq.gz".format(
+        sample=wildcards.sample)]
 
 
 rule align:

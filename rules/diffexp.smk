@@ -1,10 +1,11 @@
 rule count_matrix:
     input:
-        expand("star/{sample}/ReadsPerGene.out.tab", sample=samples.index)
+        expand("star/{sample}/ReadsPerGene.out.tab",
+            sample=samples.index.unique().tolist())
     output:
         "counts/all.tsv"
     params:
-        samples=samples.index
+        samples=samples.index.unique().tolist()
     script:
         "../scripts/count-matrix.py"
 
